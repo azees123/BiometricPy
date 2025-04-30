@@ -84,10 +84,10 @@ ios.kivy_ios_branch = master
 #ios.custom_plist = %(source.dir)s/custom.plist
 
 # (str) The Apple Team ID
-ios.codesign.teamid = YOUR_TEAM_ID_HERE
+#ios.codesign.teamid = YOUR_TEAM_ID_HERE
 
 # (str) The provisioning profile name (must match your Apple Developer account)
-ios.codesign.provisioning_profile = YOUR_PROFILE_NAME_HERE
+#ios.codesign.provisioning_profile = YOUR_PROFILE_NAME_HERE
 
 # (str) The development certificate identity
 ios.codesign.development = iPhone Developer
