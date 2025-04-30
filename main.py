@@ -9,18 +9,23 @@ from kivy.uix.label import Label
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.popup import Popup
 from kivy.uix.camera import Camera
-from kivy.core.window import Window
 from kivy.core.image import Image as CoreImage
-
-from android.storage import app_storage_path
+from kivy.utils import platform
 from kivy.graphics.texture import Texture
+
+# Determine platform-agnostic app storage path
+if platform == "android":
+    from android.storage import app_storage_path
+    APP_PATH = app_storage_path()
+else:
+    from os.path import expanduser
+    APP_PATH = os.path.join(expanduser("~"), "Documents", "FingerprintApp")
+
+os.makedirs(APP_PATH, exist_ok=True)
+DB_FILE = os.path.join(APP_PATH, 'user_db.pkl')
 
 user_db = {}
 temporary_fingerprint_data = None
-
-APP_PATH = app_storage_path()
-os.makedirs(APP_PATH, exist_ok=True)
-DB_FILE = os.path.join(APP_PATH, 'user_db.pkl')
 
 class FingerprintApp(App):
     def build(self):
@@ -74,6 +79,7 @@ class FingerprintApp(App):
         print(message)
 
     def capture_fingerprint(self, reg_no):
+        # Simulated fingerprint data
         return f"fingerprint_{reg_no}_data"
 
     def send_alert_to_admin(self, name, reg_no, time, registration_timestamp=None):
